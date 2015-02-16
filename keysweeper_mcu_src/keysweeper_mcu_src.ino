@@ -954,7 +954,7 @@ void scanForKeySweeper()
         {
           // we got the proper response to H - I...HI!
           channel--; // we incremented this AFTER we set it
-          pr("Found our KeySweeper!!! Locked onto channel ");
+          pr("Found our KeySweeper! Locked onto channel ");
           Serial.println(channel);
           EEPROM.write(E_LAST_CHAN, channel);
 
