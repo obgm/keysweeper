@@ -39,7 +39,8 @@
 
 
 /* pins:
- nRF24L01+ radio:
+ see http://arduino-info.wikispaces.com/Nrf24L01-2.4GHz-HowTo
+ nRF24L01+ radio (Mini, Nano):
  1: (square): GND
  2: (next row of 4): 3.3 VCC 
  3: CE 9
@@ -49,6 +50,16 @@
  7: MISO: 12
  8: IRQ: not used here
  
+ nRF24L01+ radio (Mega2560):
+ 1: (square): GND
+ 2: (next row of 4): 3.3 VCC
+ 3: CE 9
+ 4: CSN: 53
+ 5: SCK: 52
+ 6: MOSI 51
+ 7: MISO: 50
+ 8: IRQ: not used here
+
  W25Q80BV flash:
  
  
@@ -87,7 +98,7 @@ void setTriggers()
 
 // pins on the microcontroller
 #define CE 9
-#define CSN 8 // normally 10 but SPI flash uses 10
+#define CSN 53 // normally 10 but SPI flash uses 10
 #define FONA_TX 3
 #define FONA_RST 4
 #define FONA_RX 5 // was 2, but we're going to use that for an interrupt (RI)
