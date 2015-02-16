@@ -58,7 +58,7 @@ uint8_t hid_metakey(uint8_t c)
    uint8_t ret = 0;
    uint8_t i = 0;
    
-   for(i=0;i<255, HID_basic[i][1] != 0;i++) {
+   for(i=0;HID_basic[i][1] != 0;i++) {
       if( c == HID_basic[i][1] )
          ret = META_SHIFT;
    }
